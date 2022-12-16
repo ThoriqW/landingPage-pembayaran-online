@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2022 at 02:49 PM
+-- Generation Time: Dec 16, 2022 at 06:27 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -28,33 +28,35 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_klien` (
-  `id` int(20) NOT NULL,
+  `id_user` int(20) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nomor` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
-  `order_id` varchar(50) NOT NULL,
-  `id_modul` varchar(50) NOT NULL,
-  `status_transaksi` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `tb_klien`
+-- Table structure for table `tb_materi`
 --
 
-INSERT INTO `tb_klien` (`id`, `nama`, `nomor`, `alamat`, `order_id`, `id_modul`, `status_transaksi`, `email`, `password`) VALUES
-(35, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '2075265689', 'MD1', '1', 'thoriqwajedi88@gmail.com', '$2y$10$YhdwHKCywNEx.EDGWwddVelAMFQkzSHglBOBgGr8Khnro3DTE/bnS'),
-(36, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '938850596', 'MD1', '1', 'thoriqwajedi55@gmail.com', '$2y$10$c8mnnYTnX7gbWDwE6KmjA.UNZFItCWXW/zS5qfMI5l3smbR8gnKKK'),
-(38, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '1243746146', 'MD2', '1', 'thoriqwajedi99@gmail.com', '$2y$10$hTOCl5YHEykfCSVQsrdSbuKmMqur3Ja5v9WKLqmPPHv9Hy7jYwfOy'),
-(40, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '1425448358', 'MD2', '1', 'thoriqwajedi18@gmail.com', '$2y$10$D5.YL3ToK86b1shHbdOGE.aUvg0Cb9ztBVaCjTPDvh3j7dKkL9Y02'),
-(41, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '192926820', 'MD2', '1', 'thoriqwajedi77@gmail.com', '$2y$10$mwkG55WpRUcSY4RBuajH7.XKfgZZzyLtvSlrqvojNj8lfwqnLNQZS'),
-(42, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '1707184922', 'MD2', '1', 'thoriqwajedi17@gmail.com', '$2y$10$hWF918FnCDBtCbAPzAEPz.7IIZCBWn.WDGBqLTZggyy6j8tmBDM1C'),
-(43, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '197568744', 'MD2', '1', 'thoriqwajedi04@gmail.com', '$2y$10$ZAj.rtRcsUq/c5PBU8qGm.m8M9lIvM6cCuqcfXSaSPuxo4QMY41oO'),
-(44, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '805961492', 'MD1', '1', 'thoriqwajedi33@gmail.com', '$2y$10$wWm8mj/d/syxw33aJx48aeidCU6yeJUHn7L0.q9M0Rytuv6GoWMqC'),
-(45, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '1302333189', 'MD1', '1', 'thoriqwajedi44@gmail.com', '$2y$10$mNce.Ij2LC/fBdsFlQjiTuyc5mF.TIJxaHHtN633VC3b0ehEWTyma'),
-(46, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '939083931', 'MD1', '1', 'thoriqwajedi666@gmail.com', '$2y$10$S/ejX7sJ76qMGkTP8t9NjeFyGVKK/Yn4U9YCssYeUi9TxEnnHZK1S'),
-(47, 'Moh Thoriq Wajedi', '082296709235', 'Jl. Hangtuah', '326501847', 'MD2', '1', 'thoriqwajedi123456@gmail.com', '$2y$10$2BQb69qjaYKKMcT0vPu76eZE2jjhIDDkAm51kM.SvGNSwCTTExs8e');
+CREATE TABLE `tb_materi` (
+  `id_materi` int(50) NOT NULL,
+  `id_modul` varchar(50) NOT NULL,
+  `judul` varchar(100) NOT NULL,
+  `sub_judul` varchar(100) NOT NULL,
+  `video_1_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_materi`
+--
+
+INSERT INTO `tb_materi` (`id_materi`, `id_modul`, `judul`, `sub_judul`, `video_1_name`) VALUES
+(1, 'MD1', 'Financial Training', 'Kursu online financial training by infinity project property', 'Intro 90.mp4'),
+(2, 'MD2', 'Agent Property', 'Kursu online agent property by infinity project property', '	\r\nIntro 90.mp4');
 
 -- --------------------------------------------------------
 
@@ -76,6 +78,19 @@ INSERT INTO `tb_modul` (`id_modul`, `nama_modul`, `harga_modul`) VALUES
 ('MD1', 'Paket 1', '50000'),
 ('MD2', 'Paket 2', '50000');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_order`
+--
+
+CREATE TABLE `tb_order` (
+  `id_order` varchar(50) NOT NULL,
+  `id_user` int(20) NOT NULL,
+  `id_modul` varchar(50) NOT NULL,
+  `status_transaksi` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -84,7 +99,13 @@ INSERT INTO `tb_modul` (`id_modul`, `nama_modul`, `harga_modul`) VALUES
 -- Indexes for table `tb_klien`
 --
 ALTER TABLE `tb_klien`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- Indexes for table `tb_materi`
+--
+ALTER TABLE `tb_materi`
+  ADD PRIMARY KEY (`id_materi`),
   ADD KEY `id_modul` (`id_modul`);
 
 --
@@ -94,6 +115,14 @@ ALTER TABLE `tb_modul`
   ADD PRIMARY KEY (`id_modul`);
 
 --
+-- Indexes for table `tb_order`
+--
+ALTER TABLE `tb_order`
+  ADD PRIMARY KEY (`id_order`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_modul` (`id_modul`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -101,17 +130,24 @@ ALTER TABLE `tb_modul`
 -- AUTO_INCREMENT for table `tb_klien`
 --
 ALTER TABLE `tb_klien`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_user` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `tb_klien`
+-- Constraints for table `tb_materi`
 --
-ALTER TABLE `tb_klien`
-  ADD CONSTRAINT `tb_klien_ibfk_1` FOREIGN KEY (`id_modul`) REFERENCES `tb_modul` (`id_modul`);
+ALTER TABLE `tb_materi`
+  ADD CONSTRAINT `tb_materi_ibfk_1` FOREIGN KEY (`id_modul`) REFERENCES `tb_modul` (`id_modul`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_order`
+--
+ALTER TABLE `tb_order`
+  ADD CONSTRAINT `tb_order_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_klien` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_order_ibfk_2` FOREIGN KEY (`id_modul`) REFERENCES `tb_modul` (`id_modul`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

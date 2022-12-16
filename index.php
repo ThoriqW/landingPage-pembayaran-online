@@ -66,14 +66,17 @@
             <div class="col-lg-4 item-materi-content">
               <i class="fas fa-book-open icon-materi"></i>
               <h4 class="title-modul">Modul 1</h4>
+              <a href="checkout.php?id_modul=MD1" class="btn btn-header">Beli Kelas</a>
             </div>
             <div class="col-lg-4 item-materi-content">
               <i class="fas fa-book-open icon-materi"></i>
               <h4 class="title-modul">Modul 2</h4>
+              <a href="checkout.php?id_modul=MD2" class="btn btn-header">Beli Kelas</a>
             </div>
             <div class="col-lg-4 item-materi-content">
               <i class="fas fa-book-open icon-materi"></i>
               <h4 class="title-modul">Modul 3</h4>
+              <a href="checkout.php?id_modul=MD2" class="btn btn-header">Beli Kelas</a>
             </div>
           </div>
         </div>
@@ -88,7 +91,7 @@
         <div class="box-content">
           <div class="title-registrasi text-center">
             <h1>REGISTRASI SEKARANG UNTUK AKSES VIDEO PELATIHAN KAMI</h1>
-            <a href="form-registration.php" class="btn btn-header"
+            <a href="registration.php" class="btn btn-header"
               >Registrasi</a
             >
           </div>

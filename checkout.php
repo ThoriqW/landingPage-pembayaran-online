@@ -1,62 +1,3 @@
-<?php
-    require 'koneksi.php';
-
-  // query mendapatkan nama paket
-  $queryPaket = mysqli_query($conn, "SELECT * FROM tb_modul");
-  $resultPaket = array(); 
-  while ($data = mysqli_fetch_array($queryPaket)) {
-    $resultPaket[] = $data; //result dijadikan array 
-  }
-
-  $hidemydiv = "email-warning";
-
-  if(isset($_POST['submit'])){
-    $nama = $_POST["nama"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $nomor = $_POST["nomor-hp"];
-    $alamat = $_POST["alamat"];
-    $namaPaket = $_POST["paket"];
-    $order_id = rand();
-    $status_transaksi = 1;
-
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    if(empty($namaPaket)){
-      echo "You did not fill out the required fields.";
-    }else {
-      // echo $namaPaket;
-      // Query cek email yang sudah ada.
-      $query = "SELECT * FROM tb_klien WHERE email='".$email."'";
-      $cekEmail = mysqli_num_rows(mysqli_query($conn, $query));
-  
-      // Query mengambil id modul
-      $resultHargaPaket = mysqli_query($conn, "SELECT * FROM tb_modul WHERE nama_modul = '$namaPaket'");
-      $data = mysqli_fetch_array($resultHargaPaket);
-      $id_modul = $data['id_modul'];
-  
-      if($cekEmail > 0){
-  
-          $hidemydiv = "email-show";
-  
-      } else {
-  
-          // Menambahkan data klien yang baru
-  
-          $sql = "INSERT INTO tb_klien (id, nama, nomor, alamat, order_id, id_modul, status_transaksi, email, password)
-                  VALUES ('', '$nama', '$nomor', '$alamat', '$order_id', '$id_modul', '$status_transaksi', '$email', '$hashed_password')";    
-  
-          if(mysqli_query($conn, $sql)){
-              header("location:./midtrans/examples/snap/checkout-process-simple-version.php?order_id=$order_id");
-          } else{
-              echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-          }
-      }
-    }
-
-  }
-
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -127,19 +68,6 @@
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Alamat</label>
                     <input type="text" name="alamat" class="form-control" id="inputAddress" />
-                  </div>
-                  <div class="col-12">
-                    <label for="pilihPaket" class="form-label"
-                      >Pilih Paket</label
-                    >
-                    <select class="form-select" aria-label="Default select example" id="pilihPaket" name="paket" required>
-                        <option disabled selected value>-- Pilih Paket --</option>
-                        <?php foreach ($resultPaket as $paket): ?>
-                        <option>
-                          <?php echo $paket['nama_modul']?>
-                        </option>
-                          <?php endforeach; ?>
-                    </select>
                   </div>
                   <div class="col-12">
                     <button type="submit" name="submit" class="btn btn-header">Daftar</button>
